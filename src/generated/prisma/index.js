@@ -168,11 +168,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:mYIlxKoVmRf9FeRGQKV0iJi4rVcXqvM6qMMNFZW1xqk7PuU8Be@localhost:5433/dev-db"
+        "value": null
       }
     }
   },

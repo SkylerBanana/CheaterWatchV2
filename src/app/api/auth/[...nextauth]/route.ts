@@ -13,6 +13,7 @@ const handler = NextAuth({
     CredentialsProvider({
       credentials: {
         email: {},
+        username: {},
         password: {},
       },
       async authorize(credentials, req) {

@@ -52,6 +52,9 @@ export async function POST(request: Request) {
         { status: 409 }
       );
     }
-    return NextResponse.json({ message: "success" });
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

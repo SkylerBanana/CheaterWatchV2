@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z, ZodError } from "zod/v4";
 
 function sanitize(input: string): string {
-  // Trims whitespace i can do more stuff here id neeeded
+  // Trims whitespace i can do more stuff here if neeeded
   return input.trim().replace(/\s+/g, " ");
 }
 

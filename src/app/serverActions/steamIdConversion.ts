@@ -1,21 +1,78 @@
 "use server";
 export default async function SteamIDConverter(id: string) {
-  // Basically this function will convert any steamIDS into STEAMID64 so i can call the API
+  // Basically this function will return the type and id for use in the API
 
   const steamLegacyRegex = /^STEAM_[0-1]:([0-1]):(\d+)$/;
 
   //Maybe regex isnt the best way im unsure ill need to do research on the speed compared to splitting
   const steamProfileUrlRegex =
-    /https?:\/\/steamcommunity\.com\/profiles\/7656119\d{10}\/?/;
+    /^https?:\/\/steamcommunity\.com\/profiles\/7656119\d{10}\/?$/;
 
-  // to start im just going to Support Legacy Steamid, Steam Profile url, Steamid64 and Steam Vanity URL as i feel like those are the most useful
+  const steamCommunityUrlIDRegex =
+    /^https?:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9_-]+\/?$/;
+  const steamID64Regex = /^7656119\d{10}$/;
 
+  // to be Honest there might be a cleaner way of doing this Ill refactor this at a later date
+  /*
   if (id.match(steamLegacyRegex)) {
-    return parseLegacySteamID(id);
+    return {
+      type: "SteamID64",
+      id: parseLegacySteamID(id),
+    };
   } else if (id.match(steamProfileUrlRegex)) {
-    return parseProfileURL(id);
+    return {
+      type: "SteamID64",
+      id: parseProfileURL(id),
+    };
+  } else if (id.match(steamCommunityUrlIDRegex)) {
+    return {
+      type: "CommunityID",
+      id: parseCommunityID(id),
+    };
+  } else if (id.match(steamID64Regex)) {
+    return {
+      type: "SteamID64",
+      id: id,
+    };
+  } else if (id.length >= 3 && id.length >= 32) {
+    // we gonna treat it as a community id
+
+    return {
+      type: "CommunityID",
+      id: id,
+    };
   }
-  // Now just gotta match for the community ID and the easiest part will just be the base Steamid64 cause then i dont gotta convert :D
+    */
+
+  switch (true) {
+    case steamLegacyRegex.test(id):
+      return {
+        type: "SteamID64",
+        id: parseLegacySteamID(id),
+      };
+    case steamProfileUrlRegex.test(id):
+      return {
+        type: "SteamID64",
+        id: parseProfileURL(id),
+      };
+    case steamCommunityUrlIDRegex.test(id):
+      return {
+        type: "CommunityID",
+        id: parseCommunityID(id),
+      };
+    case steamID64Regex.test(id):
+      return {
+        type: "SteamID64",
+        id: id,
+      };
+    case id.length >= 3 && id.length <= 32:
+      return {
+        type: "CommunityID",
+        id: id,
+      };
+    default:
+      throw new Error("Invalid format");
+  }
 }
 
 // z is the account number essentially its the third part of the parse
@@ -26,13 +83,13 @@ function SteamIDLegacyTo64(z: bigint, y: bigint) {
   return (z * BigInt(2) + v + y).toString();
 }
 
-// gonna have to do basic detection for the type of Input given and then parse with the right kind
 function parseLegacySteamID(legacyID: string) {
   const parts = legacyID.split(":");
   if (parts.length !== 3) {
     throw new Error("Invalid Steam ID format");
   }
   let z = BigInt(parts[2]);
+
   let y = BigInt(parts[1]);
   return SteamIDLegacyTo64(z, y);
 }
@@ -46,5 +103,11 @@ function parseProfileURL(profileURL: string) {
 }
 
 function parseCommunityID(CommunityID: string) {
-  // this one should handle if its in URL Format or if its just the standard community ID i think
+  const parts = CommunityID.split("/");
+  //To be honest i dont feel like i need to length check this but isnt it O(1) so its not like its expensive
+  console.log(parts);
+  if (parts.length !== 6) {
+    throw new Error("Invalid Profile URL format");
+  }
+  return parts[4];
 }

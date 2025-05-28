@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z, ZodError } from "zod/v4";
+import SteamIDConverter from "@/app/serverActions/steamIdConversion";
 
 function sanitize(input: string): string {
   // Trims whitespace i can do more stuff here if neeeded
@@ -16,11 +17,16 @@ const User = z
     };
   });
 
-export default async function POST(request: Request) {
+export async function POST(request: Request) {
   try {
     const { steamuser } = await request.json();
     //validation goes here
+
     const data = User.parse(steamuser);
+
+    const { type, id } = await SteamIDConverter(data.id);
+
+    console.log(type, id);
 
     // Now its the hard part gotta Convert any type of steamid to steamid64
     // Also gotta deal with custom urls prob gonna have 2 seperate server actions

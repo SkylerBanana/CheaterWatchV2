@@ -4,10 +4,13 @@ export default function Form() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    console.log(formData.get("steamUser"));
     const response = await fetch("/api/steam", {
       method: "POST",
       body: JSON.stringify({
-        steamuser: formData.get("steamUser"),
+        steamuser: {
+          id: formData.get("steamUser"),
+        },
       }),
     });
   };

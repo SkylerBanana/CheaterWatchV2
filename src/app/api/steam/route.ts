@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { z, ZodError } from "zod/v4";
 import SteamIDConverter from "@/app/serverActions/steamIdConversion";
+import { GetUserInfoCommunityID } from "./GetUserInfoCommunityID";
+import { GetUserInfoID64 } from "./GetUserInfoID64";
 
 function sanitize(input: string): string {
   // Trims whitespace i can do more stuff here if neeeded
@@ -28,13 +30,16 @@ export async function POST(request: Request) {
 
     console.log(type, id);
 
-    // Now its the hard part gotta Convert any type of steamid to steamid64
-    // Also gotta deal with custom urls prob gonna have 2 seperate server actions
-    // One for converting the IDs and one for dealing with urls
-
-    // also need to cache them for 24hours in redis and refresh cache each time someone uses it
-
-    // that way we dont gotta hit the steam API also if a user is banned i need to modify that cache with the GO microservice to keep it fresh
+    switch (type) {
+      case "SteamID64":
+        GetUserInfoID64(id);
+        break;
+      case "CommunityID":
+        GetUserInfoCommunityID(id);
+        break;
+      default:
+        console.log("Bingus Default");
+    }
 
     return NextResponse.json({ message: "User Added" }, { status: 201 });
   } catch (err: any) {

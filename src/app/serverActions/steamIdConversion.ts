@@ -12,38 +12,6 @@ export default async function SteamIDConverter(id: string) {
     /^https?:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9_-]+\/?$/;
   const steamID64Regex = /^7656119\d{10}$/;
 
-  // to be Honest there might be a cleaner way of doing this Ill refactor this at a later date
-  /*
-  if (id.match(steamLegacyRegex)) {
-    return {
-      type: "SteamID64",
-      id: parseLegacySteamID(id),
-    };
-  } else if (id.match(steamProfileUrlRegex)) {
-    return {
-      type: "SteamID64",
-      id: parseProfileURL(id),
-    };
-  } else if (id.match(steamCommunityUrlIDRegex)) {
-    return {
-      type: "CommunityID",
-      id: parseCommunityID(id),
-    };
-  } else if (id.match(steamID64Regex)) {
-    return {
-      type: "SteamID64",
-      id: id,
-    };
-  } else if (id.length >= 3 && id.length >= 32) {
-    // we gonna treat it as a community id
-
-    return {
-      type: "CommunityID",
-      id: id,
-    };
-  }
-    */
-
   switch (true) {
     case steamLegacyRegex.test(id):
       return {

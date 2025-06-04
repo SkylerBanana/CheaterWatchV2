@@ -23,11 +23,11 @@ model User {
 }
 
 model TrackedUser {
-  id         String    @id @default(cuid(2))
+  id         String   @id @default(cuid(2))
   steamid    Int
-  banned     Boolean
-  ban_Date   DateTime?
-  date_added DateTime  @default(now())
+  vacbans    Int
+  gamebans   Int
+  date_added DateTime @default(now())
 
   trackedBy   User   @relation("TrackedByUser", fields: [trackedById], references: [id])
   trackedById String

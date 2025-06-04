@@ -3,6 +3,9 @@ import { z, ZodError } from "zod/v4";
 import SteamIDConverter from "../../serverActions/steamIdConversion";
 import { GetUserInfoCommunityID } from "./GetUserInfoCommunityID";
 import { GetUserInfoID64 } from "./GetUserInfoID64";
+import { AddUserInfo } from "./AddUserInfoToDB";
+
+import { getServerSession } from "next-auth/next";
 
 function sanitize(input: string): string {
   // Trims whitespace i can do more stuff here if neeeded
@@ -28,18 +31,24 @@ export async function POST(request: Request) {
 
     const { type, id } = await SteamIDConverter(data.id);
 
-    console.log(type, id);
+    let UserInfo;
 
     switch (type) {
       case "SteamID64":
-        GetUserInfoID64(id);
+        UserInfo = await GetUserInfoID64(id);
+
         break;
       case "CommunityID":
-        GetUserInfoCommunityID(id);
+        UserInfo = await GetUserInfoCommunityID(id);
+
         break;
       default:
         console.log("Bingus Default");
     }
+
+    const AddUser = await AddUserInfo(UserInfo);
+
+    console.log(AddUser);
 
     return NextResponse.json({ message: "User Added" }, { status: 201 });
   } catch (err: any) {

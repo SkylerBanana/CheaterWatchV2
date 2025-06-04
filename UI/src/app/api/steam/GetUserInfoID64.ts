@@ -7,7 +7,8 @@ export async function GetUserInfoID64(id: string) {
     }
 
     const json = await response.json();
-    console.log(json);
+
+    return json.players[0];
   } catch (error: any) {
     console.error(error.message);
   }

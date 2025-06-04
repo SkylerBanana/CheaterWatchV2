@@ -73,7 +73,7 @@ function parseProfileURL(profileURL: string) {
 function parseCommunityID(CommunityID: string) {
   const parts = CommunityID.split("/");
   //To be honest i dont feel like i need to length check this but isnt it O(1) so its not like its expensive
-  console.log(parts);
+
   if (parts.length !== 6) {
     throw new Error("Invalid Profile URL format");
   }

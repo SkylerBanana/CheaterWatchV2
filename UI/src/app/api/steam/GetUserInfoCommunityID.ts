@@ -9,7 +9,8 @@ export async function GetUserInfoCommunityID(id: string) {
     }
 
     const json = await response.json();
-    console.log(json);
+
+    return json.players[0];
   } catch (error: any) {
     console.error(error.message);
   }
@@ -24,7 +25,8 @@ async function GetSteamID64(id: string) {
     }
 
     const json = await response.json();
-    console.log(json.steamid);
+
+    return json.response.steamid;
   } catch (error: any) {
     console.error(error.message);
   }

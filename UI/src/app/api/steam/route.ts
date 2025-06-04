@@ -4,8 +4,7 @@ import SteamIDConverter from "../../serverActions/steamIdConversion";
 import { GetUserInfoCommunityID } from "./GetUserInfoCommunityID";
 import { GetUserInfoID64 } from "./GetUserInfoID64";
 import { AddUserInfo } from "./AddUserInfoToDB";
-
-import { getServerSession } from "next-auth/next";
+import { getToken } from "next-auth/jwt";
 
 function sanitize(input: string): string {
   // Trims whitespace i can do more stuff here if neeeded
@@ -24,6 +23,14 @@ const User = z
 
 export async function POST(request: Request) {
   try {
+    const token = await getToken({
+      req: request as any,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
+
+    if (!token) {
+      NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
     const { steamuser } = await request.json();
     //validation goes here
 
@@ -46,9 +53,7 @@ export async function POST(request: Request) {
         console.log("Bingus Default");
     }
 
-    const AddUser = await AddUserInfo(UserInfo);
-
-    console.log(AddUser);
+    const AddUser = await AddUserInfo(UserInfo, token?.sub);
 
     return NextResponse.json({ message: "User Added" }, { status: 201 });
   } catch (err: any) {

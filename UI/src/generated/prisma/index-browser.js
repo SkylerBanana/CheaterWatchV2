@@ -128,12 +128,17 @@ exports.Prisma.UserScalarFieldEnum = {
 };
 
 exports.Prisma.TrackedUserScalarFieldEnum = {
-  id: 'id',
   steamid: 'steamid',
-  banned: 'banned',
-  ban_Date: 'ban_Date',
-  date_added: 'date_added',
-  trackedById: 'trackedById'
+  vacbans: 'vacbans',
+  gamebans: 'gamebans',
+  date_added: 'date_added'
+};
+
+exports.Prisma.UserTrackedScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  trackedUserSteamid: 'trackedUserSteamid',
+  date_added: 'date_added'
 };
 
 exports.Prisma.SortOrder = {
@@ -146,15 +151,11 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
   User: 'User',
-  TrackedUser: 'TrackedUser'
+  TrackedUser: 'TrackedUser',
+  UserTracked: 'UserTracked'
 };
 
 /**

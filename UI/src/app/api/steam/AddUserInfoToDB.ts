@@ -1,7 +1,23 @@
 import prisma from "../../../lib/prisma";
 
-// Need to grab user session
-export async function AddUserInfo(userData: object, userID: any) {
-  console.log(userID);
-  return userData;
+export async function AddUserInfo(userData: any, userID: any) {
+  try {
+    await prisma.userTracked.create({
+      data: {
+        user: { connect: { id: userID } },
+        trackedUser: {
+          connectOrCreate: {
+            where: { steamid: userData.SteamId },
+            create: {
+              steamid: userData.SteamId,
+              vacbans: userData.NumberOfVACBans,
+              gamebans: userData.NumberOfGameBans,
+            },
+          },
+        },
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }

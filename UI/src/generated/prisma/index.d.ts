@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type TrackedUser = $Result.DefaultSelection<Prisma.$TrackedUserPayload>
+/**
+ * Model UserTracked
+ * 
+ */
+export type UserTracked = $Result.DefaultSelection<Prisma.$UserTrackedPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -168,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get trackedUser(): Prisma.TrackedUserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userTracked`: Exposes CRUD operations for the **UserTracked** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserTrackeds
+    * const userTrackeds = await prisma.userTracked.findMany()
+    * ```
+    */
+  get userTracked(): Prisma.UserTrackedDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,7 +624,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    TrackedUser: 'TrackedUser'
+    TrackedUser: 'TrackedUser',
+    UserTracked: 'UserTracked'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "trackedUser"
+      modelProps: "user" | "trackedUser" | "userTracked"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -780,6 +796,80 @@ export namespace Prisma {
           }
         }
       }
+      UserTracked: {
+        payload: Prisma.$UserTrackedPayload<ExtArgs>
+        fields: Prisma.UserTrackedFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserTrackedFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserTrackedFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>
+          }
+          findFirst: {
+            args: Prisma.UserTrackedFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserTrackedFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>
+          }
+          findMany: {
+            args: Prisma.UserTrackedFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>[]
+          }
+          create: {
+            args: Prisma.UserTrackedCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>
+          }
+          createMany: {
+            args: Prisma.UserTrackedCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserTrackedCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>[]
+          }
+          delete: {
+            args: Prisma.UserTrackedDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>
+          }
+          update: {
+            args: Prisma.UserTrackedUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserTrackedDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserTrackedUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserTrackedUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserTrackedUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserTrackedPayload>
+          }
+          aggregate: {
+            args: Prisma.UserTrackedAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserTracked>
+          }
+          groupBy: {
+            args: Prisma.UserTrackedGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserTrackedGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserTrackedCountArgs<ExtArgs>
+            result: $Utils.Optional<UserTrackedCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -866,6 +956,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     trackedUser?: TrackedUserOmit
+    userTracked?: UserTrackedOmit
   }
 
   /* Types for Logging */
@@ -982,7 +1073,38 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountTrackedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TrackedUserWhereInput
+    where?: UserTrackedWhereInput
+  }
+
+
+  /**
+   * Count Type TrackedUserCountOutputType
+   */
+
+  export type TrackedUserCountOutputType = {
+    trackedById: number
+  }
+
+  export type TrackedUserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trackedById?: boolean | TrackedUserCountOutputTypeCountTrackedByIdArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TrackedUserCountOutputType without action
+   */
+  export type TrackedUserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrackedUserCountOutputType
+     */
+    select?: TrackedUserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TrackedUserCountOutputType without action
+   */
+  export type TrackedUserCountOutputTypeCountTrackedByIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserTrackedWhereInput
   }
 
 
@@ -1182,7 +1304,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      trackedUsers: Prisma.$TrackedUserPayload<ExtArgs>[]
+      trackedUsers: Prisma.$UserTrackedPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1583,7 +1705,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    trackedUsers<T extends User$trackedUsersArgs<ExtArgs> = {}>(args?: Subset<T, User$trackedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrackedUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    trackedUsers<T extends User$trackedUsersArgs<ExtArgs> = {}>(args?: Subset<T, User$trackedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2009,23 +2131,23 @@ export namespace Prisma {
    */
   export type User$trackedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the TrackedUser
+     * Select specific fields to fetch from the UserTracked
      */
-    select?: TrackedUserSelect<ExtArgs> | null
+    select?: UserTrackedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the TrackedUser
+     * Omit specific fields from the UserTracked
      */
-    omit?: TrackedUserOmit<ExtArgs> | null
+    omit?: UserTrackedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: TrackedUserInclude<ExtArgs> | null
-    where?: TrackedUserWhereInput
-    orderBy?: TrackedUserOrderByWithRelationInput | TrackedUserOrderByWithRelationInput[]
-    cursor?: TrackedUserWhereUniqueInput
+    include?: UserTrackedInclude<ExtArgs> | null
+    where?: UserTrackedWhereInput
+    orderBy?: UserTrackedOrderByWithRelationInput | UserTrackedOrderByWithRelationInput[]
+    cursor?: UserTrackedWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: TrackedUserScalarFieldEnum | TrackedUserScalarFieldEnum[]
+    distinct?: UserTrackedScalarFieldEnum | UserTrackedScalarFieldEnum[]
   }
 
   /**
@@ -2060,75 +2182,67 @@ export namespace Prisma {
   }
 
   export type TrackedUserAvgAggregateOutputType = {
-    steamid: number | null
+    vacbans: number | null
+    gamebans: number | null
   }
 
   export type TrackedUserSumAggregateOutputType = {
-    steamid: number | null
+    vacbans: number | null
+    gamebans: number | null
   }
 
   export type TrackedUserMinAggregateOutputType = {
-    id: string | null
-    steamid: number | null
-    banned: boolean | null
-    ban_Date: Date | null
+    steamid: string | null
+    vacbans: number | null
+    gamebans: number | null
     date_added: Date | null
-    trackedById: string | null
   }
 
   export type TrackedUserMaxAggregateOutputType = {
-    id: string | null
-    steamid: number | null
-    banned: boolean | null
-    ban_Date: Date | null
+    steamid: string | null
+    vacbans: number | null
+    gamebans: number | null
     date_added: Date | null
-    trackedById: string | null
   }
 
   export type TrackedUserCountAggregateOutputType = {
-    id: number
     steamid: number
-    banned: number
-    ban_Date: number
+    vacbans: number
+    gamebans: number
     date_added: number
-    trackedById: number
     _all: number
   }
 
 
   export type TrackedUserAvgAggregateInputType = {
-    steamid?: true
+    vacbans?: true
+    gamebans?: true
   }
 
   export type TrackedUserSumAggregateInputType = {
-    steamid?: true
+    vacbans?: true
+    gamebans?: true
   }
 
   export type TrackedUserMinAggregateInputType = {
-    id?: true
     steamid?: true
-    banned?: true
-    ban_Date?: true
+    vacbans?: true
+    gamebans?: true
     date_added?: true
-    trackedById?: true
   }
 
   export type TrackedUserMaxAggregateInputType = {
-    id?: true
     steamid?: true
-    banned?: true
-    ban_Date?: true
+    vacbans?: true
+    gamebans?: true
     date_added?: true
-    trackedById?: true
   }
 
   export type TrackedUserCountAggregateInputType = {
-    id?: true
     steamid?: true
-    banned?: true
-    ban_Date?: true
+    vacbans?: true
+    gamebans?: true
     date_added?: true
-    trackedById?: true
     _all?: true
   }
 
@@ -2219,12 +2333,10 @@ export namespace Prisma {
   }
 
   export type TrackedUserGroupByOutputType = {
-    id: string
-    steamid: number
-    banned: boolean
-    ban_Date: Date | null
+    steamid: string
+    vacbans: number
+    gamebans: number
     date_added: Date
-    trackedById: string
     _count: TrackedUserCountAggregateOutputType | null
     _avg: TrackedUserAvgAggregateOutputType | null
     _sum: TrackedUserSumAggregateOutputType | null
@@ -2247,67 +2359,53 @@ export namespace Prisma {
 
 
   export type TrackedUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     steamid?: boolean
-    banned?: boolean
-    ban_Date?: boolean
+    vacbans?: boolean
+    gamebans?: boolean
     date_added?: boolean
-    trackedById?: boolean
-    trackedBy?: boolean | UserDefaultArgs<ExtArgs>
+    trackedById?: boolean | TrackedUser$trackedByIdArgs<ExtArgs>
+    _count?: boolean | TrackedUserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["trackedUser"]>
 
   export type TrackedUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     steamid?: boolean
-    banned?: boolean
-    ban_Date?: boolean
+    vacbans?: boolean
+    gamebans?: boolean
     date_added?: boolean
-    trackedById?: boolean
-    trackedBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["trackedUser"]>
 
   export type TrackedUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     steamid?: boolean
-    banned?: boolean
-    ban_Date?: boolean
+    vacbans?: boolean
+    gamebans?: boolean
     date_added?: boolean
-    trackedById?: boolean
-    trackedBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["trackedUser"]>
 
   export type TrackedUserSelectScalar = {
-    id?: boolean
     steamid?: boolean
-    banned?: boolean
-    ban_Date?: boolean
+    vacbans?: boolean
+    gamebans?: boolean
     date_added?: boolean
-    trackedById?: boolean
   }
 
-  export type TrackedUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "steamid" | "banned" | "ban_Date" | "date_added" | "trackedById", ExtArgs["result"]["trackedUser"]>
+  export type TrackedUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"steamid" | "vacbans" | "gamebans" | "date_added", ExtArgs["result"]["trackedUser"]>
   export type TrackedUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    trackedBy?: boolean | UserDefaultArgs<ExtArgs>
+    trackedById?: boolean | TrackedUser$trackedByIdArgs<ExtArgs>
+    _count?: boolean | TrackedUserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type TrackedUserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    trackedBy?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type TrackedUserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    trackedBy?: boolean | UserDefaultArgs<ExtArgs>
-  }
+  export type TrackedUserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TrackedUserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $TrackedUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TrackedUser"
     objects: {
-      trackedBy: Prisma.$UserPayload<ExtArgs>
+      trackedById: Prisma.$UserTrackedPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      steamid: number
-      banned: boolean
-      ban_Date: Date | null
+      steamid: string
+      vacbans: number
+      gamebans: number
       date_added: Date
-      trackedById: string
     }, ExtArgs["result"]["trackedUser"]>
     composites: {}
   }
@@ -2391,8 +2489,8 @@ export namespace Prisma {
      * // Get first 10 TrackedUsers
      * const trackedUsers = await prisma.trackedUser.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const trackedUserWithIdOnly = await prisma.trackedUser.findMany({ select: { id: true } })
+     * // Only select the `steamid`
+     * const trackedUserWithSteamidOnly = await prisma.trackedUser.findMany({ select: { steamid: true } })
      * 
      */
     findMany<T extends TrackedUserFindManyArgs>(args?: SelectSubset<T, TrackedUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrackedUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2436,9 +2534,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many TrackedUsers and only return the `id`
-     * const trackedUserWithIdOnly = await prisma.trackedUser.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many TrackedUsers and only return the `steamid`
+     * const trackedUserWithSteamidOnly = await prisma.trackedUser.createManyAndReturn({
+     *   select: { steamid: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2527,9 +2625,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more TrackedUsers and only return the `id`
-     * const trackedUserWithIdOnly = await prisma.trackedUser.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more TrackedUsers and only return the `steamid`
+     * const trackedUserWithSteamidOnly = await prisma.trackedUser.updateManyAndReturn({
+     *   select: { steamid: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2702,7 +2800,7 @@ export namespace Prisma {
    */
   export interface Prisma__TrackedUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    trackedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    trackedById<T extends TrackedUser$trackedByIdArgs<ExtArgs> = {}>(args?: Subset<T, TrackedUser$trackedByIdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2732,12 +2830,10 @@ export namespace Prisma {
    * Fields of the TrackedUser model
    */
   interface TrackedUserFieldRefs {
-    readonly id: FieldRef<"TrackedUser", 'String'>
-    readonly steamid: FieldRef<"TrackedUser", 'Int'>
-    readonly banned: FieldRef<"TrackedUser", 'Boolean'>
-    readonly ban_Date: FieldRef<"TrackedUser", 'DateTime'>
+    readonly steamid: FieldRef<"TrackedUser", 'String'>
+    readonly vacbans: FieldRef<"TrackedUser", 'Int'>
+    readonly gamebans: FieldRef<"TrackedUser", 'Int'>
     readonly date_added: FieldRef<"TrackedUser", 'DateTime'>
-    readonly trackedById: FieldRef<"TrackedUser", 'String'>
   }
     
 
@@ -2987,10 +3083,6 @@ export namespace Prisma {
      */
     data: TrackedUserCreateManyInput | TrackedUserCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TrackedUserIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3061,10 +3153,6 @@ export namespace Prisma {
      * Limit how many TrackedUsers to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TrackedUserIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3134,6 +3222,30 @@ export namespace Prisma {
   }
 
   /**
+   * TrackedUser.trackedById
+   */
+  export type TrackedUser$trackedByIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    where?: UserTrackedWhereInput
+    orderBy?: UserTrackedOrderByWithRelationInput | UserTrackedOrderByWithRelationInput[]
+    cursor?: UserTrackedWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserTrackedScalarFieldEnum | UserTrackedScalarFieldEnum[]
+  }
+
+  /**
    * TrackedUser without action
    */
   export type TrackedUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3149,6 +3261,1059 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TrackedUserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserTracked
+   */
+
+  export type AggregateUserTracked = {
+    _count: UserTrackedCountAggregateOutputType | null
+    _min: UserTrackedMinAggregateOutputType | null
+    _max: UserTrackedMaxAggregateOutputType | null
+  }
+
+  export type UserTrackedMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    trackedUserSteamid: string | null
+    date_added: Date | null
+  }
+
+  export type UserTrackedMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    trackedUserSteamid: string | null
+    date_added: Date | null
+  }
+
+  export type UserTrackedCountAggregateOutputType = {
+    id: number
+    userId: number
+    trackedUserSteamid: number
+    date_added: number
+    _all: number
+  }
+
+
+  export type UserTrackedMinAggregateInputType = {
+    id?: true
+    userId?: true
+    trackedUserSteamid?: true
+    date_added?: true
+  }
+
+  export type UserTrackedMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    trackedUserSteamid?: true
+    date_added?: true
+  }
+
+  export type UserTrackedCountAggregateInputType = {
+    id?: true
+    userId?: true
+    trackedUserSteamid?: true
+    date_added?: true
+    _all?: true
+  }
+
+  export type UserTrackedAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserTracked to aggregate.
+     */
+    where?: UserTrackedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTrackeds to fetch.
+     */
+    orderBy?: UserTrackedOrderByWithRelationInput | UserTrackedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserTrackedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTrackeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTrackeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserTrackeds
+    **/
+    _count?: true | UserTrackedCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserTrackedMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserTrackedMaxAggregateInputType
+  }
+
+  export type GetUserTrackedAggregateType<T extends UserTrackedAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserTracked]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserTracked[P]>
+      : GetScalarType<T[P], AggregateUserTracked[P]>
+  }
+
+
+
+
+  export type UserTrackedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserTrackedWhereInput
+    orderBy?: UserTrackedOrderByWithAggregationInput | UserTrackedOrderByWithAggregationInput[]
+    by: UserTrackedScalarFieldEnum[] | UserTrackedScalarFieldEnum
+    having?: UserTrackedScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserTrackedCountAggregateInputType | true
+    _min?: UserTrackedMinAggregateInputType
+    _max?: UserTrackedMaxAggregateInputType
+  }
+
+  export type UserTrackedGroupByOutputType = {
+    id: string
+    userId: string
+    trackedUserSteamid: string
+    date_added: Date
+    _count: UserTrackedCountAggregateOutputType | null
+    _min: UserTrackedMinAggregateOutputType | null
+    _max: UserTrackedMaxAggregateOutputType | null
+  }
+
+  type GetUserTrackedGroupByPayload<T extends UserTrackedGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserTrackedGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserTrackedGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserTrackedGroupByOutputType[P]>
+            : GetScalarType<T[P], UserTrackedGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserTrackedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    trackedUserSteamid?: boolean
+    date_added?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    trackedUser?: boolean | TrackedUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userTracked"]>
+
+  export type UserTrackedSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    trackedUserSteamid?: boolean
+    date_added?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    trackedUser?: boolean | TrackedUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userTracked"]>
+
+  export type UserTrackedSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    trackedUserSteamid?: boolean
+    date_added?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    trackedUser?: boolean | TrackedUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userTracked"]>
+
+  export type UserTrackedSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    trackedUserSteamid?: boolean
+    date_added?: boolean
+  }
+
+  export type UserTrackedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "trackedUserSteamid" | "date_added", ExtArgs["result"]["userTracked"]>
+  export type UserTrackedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    trackedUser?: boolean | TrackedUserDefaultArgs<ExtArgs>
+  }
+  export type UserTrackedIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    trackedUser?: boolean | TrackedUserDefaultArgs<ExtArgs>
+  }
+  export type UserTrackedIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    trackedUser?: boolean | TrackedUserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserTrackedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserTracked"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      trackedUser: Prisma.$TrackedUserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      trackedUserSteamid: string
+      date_added: Date
+    }, ExtArgs["result"]["userTracked"]>
+    composites: {}
+  }
+
+  type UserTrackedGetPayload<S extends boolean | null | undefined | UserTrackedDefaultArgs> = $Result.GetResult<Prisma.$UserTrackedPayload, S>
+
+  type UserTrackedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserTrackedFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserTrackedCountAggregateInputType | true
+    }
+
+  export interface UserTrackedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserTracked'], meta: { name: 'UserTracked' } }
+    /**
+     * Find zero or one UserTracked that matches the filter.
+     * @param {UserTrackedFindUniqueArgs} args - Arguments to find a UserTracked
+     * @example
+     * // Get one UserTracked
+     * const userTracked = await prisma.userTracked.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserTrackedFindUniqueArgs>(args: SelectSubset<T, UserTrackedFindUniqueArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserTracked that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserTrackedFindUniqueOrThrowArgs} args - Arguments to find a UserTracked
+     * @example
+     * // Get one UserTracked
+     * const userTracked = await prisma.userTracked.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserTrackedFindUniqueOrThrowArgs>(args: SelectSubset<T, UserTrackedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserTracked that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTrackedFindFirstArgs} args - Arguments to find a UserTracked
+     * @example
+     * // Get one UserTracked
+     * const userTracked = await prisma.userTracked.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserTrackedFindFirstArgs>(args?: SelectSubset<T, UserTrackedFindFirstArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserTracked that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTrackedFindFirstOrThrowArgs} args - Arguments to find a UserTracked
+     * @example
+     * // Get one UserTracked
+     * const userTracked = await prisma.userTracked.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserTrackedFindFirstOrThrowArgs>(args?: SelectSubset<T, UserTrackedFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserTrackeds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTrackedFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserTrackeds
+     * const userTrackeds = await prisma.userTracked.findMany()
+     * 
+     * // Get first 10 UserTrackeds
+     * const userTrackeds = await prisma.userTracked.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userTrackedWithIdOnly = await prisma.userTracked.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserTrackedFindManyArgs>(args?: SelectSubset<T, UserTrackedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserTracked.
+     * @param {UserTrackedCreateArgs} args - Arguments to create a UserTracked.
+     * @example
+     * // Create one UserTracked
+     * const UserTracked = await prisma.userTracked.create({
+     *   data: {
+     *     // ... data to create a UserTracked
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserTrackedCreateArgs>(args: SelectSubset<T, UserTrackedCreateArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserTrackeds.
+     * @param {UserTrackedCreateManyArgs} args - Arguments to create many UserTrackeds.
+     * @example
+     * // Create many UserTrackeds
+     * const userTracked = await prisma.userTracked.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserTrackedCreateManyArgs>(args?: SelectSubset<T, UserTrackedCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserTrackeds and returns the data saved in the database.
+     * @param {UserTrackedCreateManyAndReturnArgs} args - Arguments to create many UserTrackeds.
+     * @example
+     * // Create many UserTrackeds
+     * const userTracked = await prisma.userTracked.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserTrackeds and only return the `id`
+     * const userTrackedWithIdOnly = await prisma.userTracked.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserTrackedCreateManyAndReturnArgs>(args?: SelectSubset<T, UserTrackedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserTracked.
+     * @param {UserTrackedDeleteArgs} args - Arguments to delete one UserTracked.
+     * @example
+     * // Delete one UserTracked
+     * const UserTracked = await prisma.userTracked.delete({
+     *   where: {
+     *     // ... filter to delete one UserTracked
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserTrackedDeleteArgs>(args: SelectSubset<T, UserTrackedDeleteArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserTracked.
+     * @param {UserTrackedUpdateArgs} args - Arguments to update one UserTracked.
+     * @example
+     * // Update one UserTracked
+     * const userTracked = await prisma.userTracked.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserTrackedUpdateArgs>(args: SelectSubset<T, UserTrackedUpdateArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserTrackeds.
+     * @param {UserTrackedDeleteManyArgs} args - Arguments to filter UserTrackeds to delete.
+     * @example
+     * // Delete a few UserTrackeds
+     * const { count } = await prisma.userTracked.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserTrackedDeleteManyArgs>(args?: SelectSubset<T, UserTrackedDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserTrackeds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTrackedUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserTrackeds
+     * const userTracked = await prisma.userTracked.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserTrackedUpdateManyArgs>(args: SelectSubset<T, UserTrackedUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserTrackeds and returns the data updated in the database.
+     * @param {UserTrackedUpdateManyAndReturnArgs} args - Arguments to update many UserTrackeds.
+     * @example
+     * // Update many UserTrackeds
+     * const userTracked = await prisma.userTracked.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserTrackeds and only return the `id`
+     * const userTrackedWithIdOnly = await prisma.userTracked.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserTrackedUpdateManyAndReturnArgs>(args: SelectSubset<T, UserTrackedUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserTracked.
+     * @param {UserTrackedUpsertArgs} args - Arguments to update or create a UserTracked.
+     * @example
+     * // Update or create a UserTracked
+     * const userTracked = await prisma.userTracked.upsert({
+     *   create: {
+     *     // ... data to create a UserTracked
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserTracked we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserTrackedUpsertArgs>(args: SelectSubset<T, UserTrackedUpsertArgs<ExtArgs>>): Prisma__UserTrackedClient<$Result.GetResult<Prisma.$UserTrackedPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserTrackeds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTrackedCountArgs} args - Arguments to filter UserTrackeds to count.
+     * @example
+     * // Count the number of UserTrackeds
+     * const count = await prisma.userTracked.count({
+     *   where: {
+     *     // ... the filter for the UserTrackeds we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserTrackedCountArgs>(
+      args?: Subset<T, UserTrackedCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserTrackedCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserTracked.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTrackedAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserTrackedAggregateArgs>(args: Subset<T, UserTrackedAggregateArgs>): Prisma.PrismaPromise<GetUserTrackedAggregateType<T>>
+
+    /**
+     * Group by UserTracked.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserTrackedGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserTrackedGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserTrackedGroupByArgs['orderBy'] }
+        : { orderBy?: UserTrackedGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserTrackedGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserTrackedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserTracked model
+   */
+  readonly fields: UserTrackedFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserTracked.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserTrackedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    trackedUser<T extends TrackedUserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TrackedUserDefaultArgs<ExtArgs>>): Prisma__TrackedUserClient<$Result.GetResult<Prisma.$TrackedUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserTracked model
+   */
+  interface UserTrackedFieldRefs {
+    readonly id: FieldRef<"UserTracked", 'String'>
+    readonly userId: FieldRef<"UserTracked", 'String'>
+    readonly trackedUserSteamid: FieldRef<"UserTracked", 'String'>
+    readonly date_added: FieldRef<"UserTracked", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserTracked findUnique
+   */
+  export type UserTrackedFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTracked to fetch.
+     */
+    where: UserTrackedWhereUniqueInput
+  }
+
+  /**
+   * UserTracked findUniqueOrThrow
+   */
+  export type UserTrackedFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTracked to fetch.
+     */
+    where: UserTrackedWhereUniqueInput
+  }
+
+  /**
+   * UserTracked findFirst
+   */
+  export type UserTrackedFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTracked to fetch.
+     */
+    where?: UserTrackedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTrackeds to fetch.
+     */
+    orderBy?: UserTrackedOrderByWithRelationInput | UserTrackedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserTrackeds.
+     */
+    cursor?: UserTrackedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTrackeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTrackeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserTrackeds.
+     */
+    distinct?: UserTrackedScalarFieldEnum | UserTrackedScalarFieldEnum[]
+  }
+
+  /**
+   * UserTracked findFirstOrThrow
+   */
+  export type UserTrackedFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTracked to fetch.
+     */
+    where?: UserTrackedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTrackeds to fetch.
+     */
+    orderBy?: UserTrackedOrderByWithRelationInput | UserTrackedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserTrackeds.
+     */
+    cursor?: UserTrackedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTrackeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTrackeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserTrackeds.
+     */
+    distinct?: UserTrackedScalarFieldEnum | UserTrackedScalarFieldEnum[]
+  }
+
+  /**
+   * UserTracked findMany
+   */
+  export type UserTrackedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * Filter, which UserTrackeds to fetch.
+     */
+    where?: UserTrackedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserTrackeds to fetch.
+     */
+    orderBy?: UserTrackedOrderByWithRelationInput | UserTrackedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserTrackeds.
+     */
+    cursor?: UserTrackedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserTrackeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserTrackeds.
+     */
+    skip?: number
+    distinct?: UserTrackedScalarFieldEnum | UserTrackedScalarFieldEnum[]
+  }
+
+  /**
+   * UserTracked create
+   */
+  export type UserTrackedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserTracked.
+     */
+    data: XOR<UserTrackedCreateInput, UserTrackedUncheckedCreateInput>
+  }
+
+  /**
+   * UserTracked createMany
+   */
+  export type UserTrackedCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserTrackeds.
+     */
+    data: UserTrackedCreateManyInput | UserTrackedCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserTracked createManyAndReturn
+   */
+  export type UserTrackedCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserTrackeds.
+     */
+    data: UserTrackedCreateManyInput | UserTrackedCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserTracked update
+   */
+  export type UserTrackedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserTracked.
+     */
+    data: XOR<UserTrackedUpdateInput, UserTrackedUncheckedUpdateInput>
+    /**
+     * Choose, which UserTracked to update.
+     */
+    where: UserTrackedWhereUniqueInput
+  }
+
+  /**
+   * UserTracked updateMany
+   */
+  export type UserTrackedUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserTrackeds.
+     */
+    data: XOR<UserTrackedUpdateManyMutationInput, UserTrackedUncheckedUpdateManyInput>
+    /**
+     * Filter which UserTrackeds to update
+     */
+    where?: UserTrackedWhereInput
+    /**
+     * Limit how many UserTrackeds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserTracked updateManyAndReturn
+   */
+  export type UserTrackedUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * The data used to update UserTrackeds.
+     */
+    data: XOR<UserTrackedUpdateManyMutationInput, UserTrackedUncheckedUpdateManyInput>
+    /**
+     * Filter which UserTrackeds to update
+     */
+    where?: UserTrackedWhereInput
+    /**
+     * Limit how many UserTrackeds to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserTracked upsert
+   */
+  export type UserTrackedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserTracked to update in case it exists.
+     */
+    where: UserTrackedWhereUniqueInput
+    /**
+     * In case the UserTracked found by the `where` argument doesn't exist, create a new UserTracked with this data.
+     */
+    create: XOR<UserTrackedCreateInput, UserTrackedUncheckedCreateInput>
+    /**
+     * In case the UserTracked was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserTrackedUpdateInput, UserTrackedUncheckedUpdateInput>
+  }
+
+  /**
+   * UserTracked delete
+   */
+  export type UserTrackedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
+    /**
+     * Filter which UserTracked to delete.
+     */
+    where: UserTrackedWhereUniqueInput
+  }
+
+  /**
+   * UserTracked deleteMany
+   */
+  export type UserTrackedDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserTrackeds to delete
+     */
+    where?: UserTrackedWhereInput
+    /**
+     * Limit how many UserTrackeds to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserTracked without action
+   */
+  export type UserTrackedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserTracked
+     */
+    select?: UserTrackedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserTracked
+     */
+    omit?: UserTrackedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserTrackedInclude<ExtArgs> | null
   }
 
 
@@ -3177,15 +4342,23 @@ export namespace Prisma {
 
 
   export const TrackedUserScalarFieldEnum: {
-    id: 'id',
     steamid: 'steamid',
-    banned: 'banned',
-    ban_Date: 'ban_Date',
-    date_added: 'date_added',
-    trackedById: 'trackedById'
+    vacbans: 'vacbans',
+    gamebans: 'gamebans',
+    date_added: 'date_added'
   };
 
   export type TrackedUserScalarFieldEnum = (typeof TrackedUserScalarFieldEnum)[keyof typeof TrackedUserScalarFieldEnum]
+
+
+  export const UserTrackedScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    trackedUserSteamid: 'trackedUserSteamid',
+    date_added: 'date_added'
+  };
+
+  export type UserTrackedScalarFieldEnum = (typeof UserTrackedScalarFieldEnum)[keyof typeof UserTrackedScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3202,14 +4375,6 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3242,13 +4407,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3291,7 +4449,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
     hashed_password?: StringFilter<"User"> | string
-    trackedUsers?: TrackedUserListRelationFilter
+    trackedUsers?: UserTrackedListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3299,7 +4457,7 @@ export namespace Prisma {
     email?: SortOrder
     username?: SortOrder
     hashed_password?: SortOrder
-    trackedUsers?: TrackedUserOrderByRelationAggregateInput
+    trackedUsers?: UserTrackedOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3310,7 +4468,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     hashed_password?: StringFilter<"User"> | string
-    trackedUsers?: TrackedUserListRelationFilter
+    trackedUsers?: UserTrackedListRelationFilter
   }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -3337,46 +4495,37 @@ export namespace Prisma {
     AND?: TrackedUserWhereInput | TrackedUserWhereInput[]
     OR?: TrackedUserWhereInput[]
     NOT?: TrackedUserWhereInput | TrackedUserWhereInput[]
-    id?: StringFilter<"TrackedUser"> | string
-    steamid?: IntFilter<"TrackedUser"> | number
-    banned?: BoolFilter<"TrackedUser"> | boolean
-    ban_Date?: DateTimeNullableFilter<"TrackedUser"> | Date | string | null
+    steamid?: StringFilter<"TrackedUser"> | string
+    vacbans?: IntFilter<"TrackedUser"> | number
+    gamebans?: IntFilter<"TrackedUser"> | number
     date_added?: DateTimeFilter<"TrackedUser"> | Date | string
-    trackedById?: StringFilter<"TrackedUser"> | string
-    trackedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    trackedById?: UserTrackedListRelationFilter
   }
 
   export type TrackedUserOrderByWithRelationInput = {
-    id?: SortOrder
     steamid?: SortOrder
-    banned?: SortOrder
-    ban_Date?: SortOrderInput | SortOrder
+    vacbans?: SortOrder
+    gamebans?: SortOrder
     date_added?: SortOrder
-    trackedById?: SortOrder
-    trackedBy?: UserOrderByWithRelationInput
+    trackedById?: UserTrackedOrderByRelationAggregateInput
   }
 
   export type TrackedUserWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    trackedById_steamid?: TrackedUserTrackedByIdSteamidCompoundUniqueInput
+    steamid?: string
     AND?: TrackedUserWhereInput | TrackedUserWhereInput[]
     OR?: TrackedUserWhereInput[]
     NOT?: TrackedUserWhereInput | TrackedUserWhereInput[]
-    steamid?: IntFilter<"TrackedUser"> | number
-    banned?: BoolFilter<"TrackedUser"> | boolean
-    ban_Date?: DateTimeNullableFilter<"TrackedUser"> | Date | string | null
+    vacbans?: IntFilter<"TrackedUser"> | number
+    gamebans?: IntFilter<"TrackedUser"> | number
     date_added?: DateTimeFilter<"TrackedUser"> | Date | string
-    trackedById?: StringFilter<"TrackedUser"> | string
-    trackedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "trackedById_steamid">
+    trackedById?: UserTrackedListRelationFilter
+  }, "steamid">
 
   export type TrackedUserOrderByWithAggregationInput = {
-    id?: SortOrder
     steamid?: SortOrder
-    banned?: SortOrder
-    ban_Date?: SortOrderInput | SortOrder
+    vacbans?: SortOrder
+    gamebans?: SortOrder
     date_added?: SortOrder
-    trackedById?: SortOrder
     _count?: TrackedUserCountOrderByAggregateInput
     _avg?: TrackedUserAvgOrderByAggregateInput
     _max?: TrackedUserMaxOrderByAggregateInput
@@ -3388,12 +4537,64 @@ export namespace Prisma {
     AND?: TrackedUserScalarWhereWithAggregatesInput | TrackedUserScalarWhereWithAggregatesInput[]
     OR?: TrackedUserScalarWhereWithAggregatesInput[]
     NOT?: TrackedUserScalarWhereWithAggregatesInput | TrackedUserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TrackedUser"> | string
-    steamid?: IntWithAggregatesFilter<"TrackedUser"> | number
-    banned?: BoolWithAggregatesFilter<"TrackedUser"> | boolean
-    ban_Date?: DateTimeNullableWithAggregatesFilter<"TrackedUser"> | Date | string | null
+    steamid?: StringWithAggregatesFilter<"TrackedUser"> | string
+    vacbans?: IntWithAggregatesFilter<"TrackedUser"> | number
+    gamebans?: IntWithAggregatesFilter<"TrackedUser"> | number
     date_added?: DateTimeWithAggregatesFilter<"TrackedUser"> | Date | string
-    trackedById?: StringWithAggregatesFilter<"TrackedUser"> | string
+  }
+
+  export type UserTrackedWhereInput = {
+    AND?: UserTrackedWhereInput | UserTrackedWhereInput[]
+    OR?: UserTrackedWhereInput[]
+    NOT?: UserTrackedWhereInput | UserTrackedWhereInput[]
+    id?: StringFilter<"UserTracked"> | string
+    userId?: StringFilter<"UserTracked"> | string
+    trackedUserSteamid?: StringFilter<"UserTracked"> | string
+    date_added?: DateTimeFilter<"UserTracked"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    trackedUser?: XOR<TrackedUserScalarRelationFilter, TrackedUserWhereInput>
+  }
+
+  export type UserTrackedOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    trackedUserSteamid?: SortOrder
+    date_added?: SortOrder
+    user?: UserOrderByWithRelationInput
+    trackedUser?: TrackedUserOrderByWithRelationInput
+  }
+
+  export type UserTrackedWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_trackedUserSteamid?: UserTrackedUserIdTrackedUserSteamidCompoundUniqueInput
+    AND?: UserTrackedWhereInput | UserTrackedWhereInput[]
+    OR?: UserTrackedWhereInput[]
+    NOT?: UserTrackedWhereInput | UserTrackedWhereInput[]
+    userId?: StringFilter<"UserTracked"> | string
+    trackedUserSteamid?: StringFilter<"UserTracked"> | string
+    date_added?: DateTimeFilter<"UserTracked"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    trackedUser?: XOR<TrackedUserScalarRelationFilter, TrackedUserWhereInput>
+  }, "id" | "userId_trackedUserSteamid">
+
+  export type UserTrackedOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    trackedUserSteamid?: SortOrder
+    date_added?: SortOrder
+    _count?: UserTrackedCountOrderByAggregateInput
+    _max?: UserTrackedMaxOrderByAggregateInput
+    _min?: UserTrackedMinOrderByAggregateInput
+  }
+
+  export type UserTrackedScalarWhereWithAggregatesInput = {
+    AND?: UserTrackedScalarWhereWithAggregatesInput | UserTrackedScalarWhereWithAggregatesInput[]
+    OR?: UserTrackedScalarWhereWithAggregatesInput[]
+    NOT?: UserTrackedScalarWhereWithAggregatesInput | UserTrackedScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserTracked"> | string
+    userId?: StringWithAggregatesFilter<"UserTracked"> | string
+    trackedUserSteamid?: StringWithAggregatesFilter<"UserTracked"> | string
+    date_added?: DateTimeWithAggregatesFilter<"UserTracked"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -3401,7 +4602,7 @@ export namespace Prisma {
     email: string
     username: string
     hashed_password: string
-    trackedUsers?: TrackedUserCreateNestedManyWithoutTrackedByInput
+    trackedUsers?: UserTrackedCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -3409,7 +4610,7 @@ export namespace Prisma {
     email: string
     username: string
     hashed_password: string
-    trackedUsers?: TrackedUserUncheckedCreateNestedManyWithoutTrackedByInput
+    trackedUsers?: UserTrackedUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -3417,7 +4618,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     hashed_password?: StringFieldUpdateOperationsInput | string
-    trackedUsers?: TrackedUserUpdateManyWithoutTrackedByNestedInput
+    trackedUsers?: UserTrackedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -3425,7 +4626,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     hashed_password?: StringFieldUpdateOperationsInput | string
-    trackedUsers?: TrackedUserUncheckedUpdateManyWithoutTrackedByNestedInput
+    trackedUsers?: UserTrackedUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -3450,65 +4651,103 @@ export namespace Prisma {
   }
 
   export type TrackedUserCreateInput = {
-    id?: string
-    steamid: number
-    banned: boolean
-    ban_Date?: Date | string | null
+    steamid: string
+    vacbans: number
+    gamebans: number
     date_added?: Date | string
-    trackedBy: UserCreateNestedOneWithoutTrackedUsersInput
+    trackedById?: UserTrackedCreateNestedManyWithoutTrackedUserInput
   }
 
   export type TrackedUserUncheckedCreateInput = {
-    id?: string
-    steamid: number
-    banned: boolean
-    ban_Date?: Date | string | null
+    steamid: string
+    vacbans: number
+    gamebans: number
     date_added?: Date | string
-    trackedById: string
+    trackedById?: UserTrackedUncheckedCreateNestedManyWithoutTrackedUserInput
   }
 
   export type TrackedUserUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    steamid?: IntFieldUpdateOperationsInput | number
-    banned?: BoolFieldUpdateOperationsInput | boolean
-    ban_Date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    steamid?: StringFieldUpdateOperationsInput | string
+    vacbans?: IntFieldUpdateOperationsInput | number
+    gamebans?: IntFieldUpdateOperationsInput | number
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
-    trackedBy?: UserUpdateOneRequiredWithoutTrackedUsersNestedInput
+    trackedById?: UserTrackedUpdateManyWithoutTrackedUserNestedInput
   }
 
   export type TrackedUserUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    steamid?: IntFieldUpdateOperationsInput | number
-    banned?: BoolFieldUpdateOperationsInput | boolean
-    ban_Date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    steamid?: StringFieldUpdateOperationsInput | string
+    vacbans?: IntFieldUpdateOperationsInput | number
+    gamebans?: IntFieldUpdateOperationsInput | number
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
-    trackedById?: StringFieldUpdateOperationsInput | string
+    trackedById?: UserTrackedUncheckedUpdateManyWithoutTrackedUserNestedInput
   }
 
   export type TrackedUserCreateManyInput = {
-    id?: string
-    steamid: number
-    banned: boolean
-    ban_Date?: Date | string | null
+    steamid: string
+    vacbans: number
+    gamebans: number
     date_added?: Date | string
-    trackedById: string
   }
 
   export type TrackedUserUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    steamid?: IntFieldUpdateOperationsInput | number
-    banned?: BoolFieldUpdateOperationsInput | boolean
-    ban_Date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    steamid?: StringFieldUpdateOperationsInput | string
+    vacbans?: IntFieldUpdateOperationsInput | number
+    gamebans?: IntFieldUpdateOperationsInput | number
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TrackedUserUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    steamid?: IntFieldUpdateOperationsInput | number
-    banned?: BoolFieldUpdateOperationsInput | boolean
-    ban_Date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    steamid?: StringFieldUpdateOperationsInput | string
+    vacbans?: IntFieldUpdateOperationsInput | number
+    gamebans?: IntFieldUpdateOperationsInput | number
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
-    trackedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserTrackedCreateInput = {
+    id?: string
+    date_added?: Date | string
+    user: UserCreateNestedOneWithoutTrackedUsersInput
+    trackedUser: TrackedUserCreateNestedOneWithoutTrackedByIdInput
+  }
+
+  export type UserTrackedUncheckedCreateInput = {
+    id?: string
+    userId: string
+    trackedUserSteamid: string
+    date_added?: Date | string
+  }
+
+  export type UserTrackedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutTrackedUsersNestedInput
+    trackedUser?: TrackedUserUpdateOneRequiredWithoutTrackedByIdNestedInput
+  }
+
+  export type UserTrackedUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    trackedUserSteamid?: StringFieldUpdateOperationsInput | string
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserTrackedCreateManyInput = {
+    id?: string
+    userId: string
+    trackedUserSteamid: string
+    date_added?: Date | string
+  }
+
+  export type UserTrackedUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserTrackedUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    trackedUserSteamid?: StringFieldUpdateOperationsInput | string
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3526,13 +4765,13 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type TrackedUserListRelationFilter = {
-    every?: TrackedUserWhereInput
-    some?: TrackedUserWhereInput
-    none?: TrackedUserWhereInput
+  export type UserTrackedListRelationFilter = {
+    every?: UserTrackedWhereInput
+    some?: UserTrackedWhereInput
+    none?: UserTrackedWhereInput
   }
 
-  export type TrackedUserOrderByRelationAggregateInput = {
+  export type UserTrackedOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -3586,22 +4825,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3613,54 +4836,35 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type TrackedUserTrackedByIdSteamidCompoundUniqueInput = {
-    trackedById: string
-    steamid: number
-  }
-
   export type TrackedUserCountOrderByAggregateInput = {
-    id?: SortOrder
     steamid?: SortOrder
-    banned?: SortOrder
-    ban_Date?: SortOrder
+    vacbans?: SortOrder
+    gamebans?: SortOrder
     date_added?: SortOrder
-    trackedById?: SortOrder
   }
 
   export type TrackedUserAvgOrderByAggregateInput = {
-    steamid?: SortOrder
+    vacbans?: SortOrder
+    gamebans?: SortOrder
   }
 
   export type TrackedUserMaxOrderByAggregateInput = {
-    id?: SortOrder
     steamid?: SortOrder
-    banned?: SortOrder
-    ban_Date?: SortOrder
+    vacbans?: SortOrder
+    gamebans?: SortOrder
     date_added?: SortOrder
-    trackedById?: SortOrder
   }
 
   export type TrackedUserMinOrderByAggregateInput = {
-    id?: SortOrder
     steamid?: SortOrder
-    banned?: SortOrder
-    ban_Date?: SortOrder
+    vacbans?: SortOrder
+    gamebans?: SortOrder
     date_added?: SortOrder
-    trackedById?: SortOrder
   }
 
   export type TrackedUserSumOrderByAggregateInput = {
-    steamid?: SortOrder
+    vacbans?: SortOrder
+    gamebans?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3679,28 +4883,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3715,56 +4897,100 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type TrackedUserCreateNestedManyWithoutTrackedByInput = {
-    create?: XOR<TrackedUserCreateWithoutTrackedByInput, TrackedUserUncheckedCreateWithoutTrackedByInput> | TrackedUserCreateWithoutTrackedByInput[] | TrackedUserUncheckedCreateWithoutTrackedByInput[]
-    connectOrCreate?: TrackedUserCreateOrConnectWithoutTrackedByInput | TrackedUserCreateOrConnectWithoutTrackedByInput[]
-    createMany?: TrackedUserCreateManyTrackedByInputEnvelope
-    connect?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
-  export type TrackedUserUncheckedCreateNestedManyWithoutTrackedByInput = {
-    create?: XOR<TrackedUserCreateWithoutTrackedByInput, TrackedUserUncheckedCreateWithoutTrackedByInput> | TrackedUserCreateWithoutTrackedByInput[] | TrackedUserUncheckedCreateWithoutTrackedByInput[]
-    connectOrCreate?: TrackedUserCreateOrConnectWithoutTrackedByInput | TrackedUserCreateOrConnectWithoutTrackedByInput[]
-    createMany?: TrackedUserCreateManyTrackedByInputEnvelope
-    connect?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
+  export type TrackedUserScalarRelationFilter = {
+    is?: TrackedUserWhereInput
+    isNot?: TrackedUserWhereInput
+  }
+
+  export type UserTrackedUserIdTrackedUserSteamidCompoundUniqueInput = {
+    userId: string
+    trackedUserSteamid: string
+  }
+
+  export type UserTrackedCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    trackedUserSteamid?: SortOrder
+    date_added?: SortOrder
+  }
+
+  export type UserTrackedMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    trackedUserSteamid?: SortOrder
+    date_added?: SortOrder
+  }
+
+  export type UserTrackedMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    trackedUserSteamid?: SortOrder
+    date_added?: SortOrder
+  }
+
+  export type UserTrackedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserTrackedCreateWithoutUserInput, UserTrackedUncheckedCreateWithoutUserInput> | UserTrackedCreateWithoutUserInput[] | UserTrackedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutUserInput | UserTrackedCreateOrConnectWithoutUserInput[]
+    createMany?: UserTrackedCreateManyUserInputEnvelope
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+  }
+
+  export type UserTrackedUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserTrackedCreateWithoutUserInput, UserTrackedUncheckedCreateWithoutUserInput> | UserTrackedCreateWithoutUserInput[] | UserTrackedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutUserInput | UserTrackedCreateOrConnectWithoutUserInput[]
+    createMany?: UserTrackedCreateManyUserInputEnvelope
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type TrackedUserUpdateManyWithoutTrackedByNestedInput = {
-    create?: XOR<TrackedUserCreateWithoutTrackedByInput, TrackedUserUncheckedCreateWithoutTrackedByInput> | TrackedUserCreateWithoutTrackedByInput[] | TrackedUserUncheckedCreateWithoutTrackedByInput[]
-    connectOrCreate?: TrackedUserCreateOrConnectWithoutTrackedByInput | TrackedUserCreateOrConnectWithoutTrackedByInput[]
-    upsert?: TrackedUserUpsertWithWhereUniqueWithoutTrackedByInput | TrackedUserUpsertWithWhereUniqueWithoutTrackedByInput[]
-    createMany?: TrackedUserCreateManyTrackedByInputEnvelope
-    set?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    disconnect?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    delete?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    connect?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    update?: TrackedUserUpdateWithWhereUniqueWithoutTrackedByInput | TrackedUserUpdateWithWhereUniqueWithoutTrackedByInput[]
-    updateMany?: TrackedUserUpdateManyWithWhereWithoutTrackedByInput | TrackedUserUpdateManyWithWhereWithoutTrackedByInput[]
-    deleteMany?: TrackedUserScalarWhereInput | TrackedUserScalarWhereInput[]
+  export type UserTrackedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserTrackedCreateWithoutUserInput, UserTrackedUncheckedCreateWithoutUserInput> | UserTrackedCreateWithoutUserInput[] | UserTrackedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutUserInput | UserTrackedCreateOrConnectWithoutUserInput[]
+    upsert?: UserTrackedUpsertWithWhereUniqueWithoutUserInput | UserTrackedUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserTrackedCreateManyUserInputEnvelope
+    set?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    disconnect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    delete?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    update?: UserTrackedUpdateWithWhereUniqueWithoutUserInput | UserTrackedUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserTrackedUpdateManyWithWhereWithoutUserInput | UserTrackedUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserTrackedScalarWhereInput | UserTrackedScalarWhereInput[]
   }
 
-  export type TrackedUserUncheckedUpdateManyWithoutTrackedByNestedInput = {
-    create?: XOR<TrackedUserCreateWithoutTrackedByInput, TrackedUserUncheckedCreateWithoutTrackedByInput> | TrackedUserCreateWithoutTrackedByInput[] | TrackedUserUncheckedCreateWithoutTrackedByInput[]
-    connectOrCreate?: TrackedUserCreateOrConnectWithoutTrackedByInput | TrackedUserCreateOrConnectWithoutTrackedByInput[]
-    upsert?: TrackedUserUpsertWithWhereUniqueWithoutTrackedByInput | TrackedUserUpsertWithWhereUniqueWithoutTrackedByInput[]
-    createMany?: TrackedUserCreateManyTrackedByInputEnvelope
-    set?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    disconnect?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    delete?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    connect?: TrackedUserWhereUniqueInput | TrackedUserWhereUniqueInput[]
-    update?: TrackedUserUpdateWithWhereUniqueWithoutTrackedByInput | TrackedUserUpdateWithWhereUniqueWithoutTrackedByInput[]
-    updateMany?: TrackedUserUpdateManyWithWhereWithoutTrackedByInput | TrackedUserUpdateManyWithWhereWithoutTrackedByInput[]
-    deleteMany?: TrackedUserScalarWhereInput | TrackedUserScalarWhereInput[]
+  export type UserTrackedUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserTrackedCreateWithoutUserInput, UserTrackedUncheckedCreateWithoutUserInput> | UserTrackedCreateWithoutUserInput[] | UserTrackedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutUserInput | UserTrackedCreateOrConnectWithoutUserInput[]
+    upsert?: UserTrackedUpsertWithWhereUniqueWithoutUserInput | UserTrackedUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserTrackedCreateManyUserInputEnvelope
+    set?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    disconnect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    delete?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    update?: UserTrackedUpdateWithWhereUniqueWithoutUserInput | UserTrackedUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserTrackedUpdateManyWithWhereWithoutUserInput | UserTrackedUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserTrackedScalarWhereInput | UserTrackedScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutTrackedUsersInput = {
-    create?: XOR<UserCreateWithoutTrackedUsersInput, UserUncheckedCreateWithoutTrackedUsersInput>
-    connectOrCreate?: UserCreateOrConnectWithoutTrackedUsersInput
-    connect?: UserWhereUniqueInput
+  export type UserTrackedCreateNestedManyWithoutTrackedUserInput = {
+    create?: XOR<UserTrackedCreateWithoutTrackedUserInput, UserTrackedUncheckedCreateWithoutTrackedUserInput> | UserTrackedCreateWithoutTrackedUserInput[] | UserTrackedUncheckedCreateWithoutTrackedUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutTrackedUserInput | UserTrackedCreateOrConnectWithoutTrackedUserInput[]
+    createMany?: UserTrackedCreateManyTrackedUserInputEnvelope
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+  }
+
+  export type UserTrackedUncheckedCreateNestedManyWithoutTrackedUserInput = {
+    create?: XOR<UserTrackedCreateWithoutTrackedUserInput, UserTrackedUncheckedCreateWithoutTrackedUserInput> | UserTrackedCreateWithoutTrackedUserInput[] | UserTrackedUncheckedCreateWithoutTrackedUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutTrackedUserInput | UserTrackedCreateOrConnectWithoutTrackedUserInput[]
+    createMany?: UserTrackedCreateManyTrackedUserInputEnvelope
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -3775,16 +5001,48 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type UserTrackedUpdateManyWithoutTrackedUserNestedInput = {
+    create?: XOR<UserTrackedCreateWithoutTrackedUserInput, UserTrackedUncheckedCreateWithoutTrackedUserInput> | UserTrackedCreateWithoutTrackedUserInput[] | UserTrackedUncheckedCreateWithoutTrackedUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutTrackedUserInput | UserTrackedCreateOrConnectWithoutTrackedUserInput[]
+    upsert?: UserTrackedUpsertWithWhereUniqueWithoutTrackedUserInput | UserTrackedUpsertWithWhereUniqueWithoutTrackedUserInput[]
+    createMany?: UserTrackedCreateManyTrackedUserInputEnvelope
+    set?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    disconnect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    delete?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    update?: UserTrackedUpdateWithWhereUniqueWithoutTrackedUserInput | UserTrackedUpdateWithWhereUniqueWithoutTrackedUserInput[]
+    updateMany?: UserTrackedUpdateManyWithWhereWithoutTrackedUserInput | UserTrackedUpdateManyWithWhereWithoutTrackedUserInput[]
+    deleteMany?: UserTrackedScalarWhereInput | UserTrackedScalarWhereInput[]
+  }
+
+  export type UserTrackedUncheckedUpdateManyWithoutTrackedUserNestedInput = {
+    create?: XOR<UserTrackedCreateWithoutTrackedUserInput, UserTrackedUncheckedCreateWithoutTrackedUserInput> | UserTrackedCreateWithoutTrackedUserInput[] | UserTrackedUncheckedCreateWithoutTrackedUserInput[]
+    connectOrCreate?: UserTrackedCreateOrConnectWithoutTrackedUserInput | UserTrackedCreateOrConnectWithoutTrackedUserInput[]
+    upsert?: UserTrackedUpsertWithWhereUniqueWithoutTrackedUserInput | UserTrackedUpsertWithWhereUniqueWithoutTrackedUserInput[]
+    createMany?: UserTrackedCreateManyTrackedUserInputEnvelope
+    set?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    disconnect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    delete?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    connect?: UserTrackedWhereUniqueInput | UserTrackedWhereUniqueInput[]
+    update?: UserTrackedUpdateWithWhereUniqueWithoutTrackedUserInput | UserTrackedUpdateWithWhereUniqueWithoutTrackedUserInput[]
+    updateMany?: UserTrackedUpdateManyWithWhereWithoutTrackedUserInput | UserTrackedUpdateManyWithWhereWithoutTrackedUserInput[]
+    deleteMany?: UserTrackedScalarWhereInput | UserTrackedScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutTrackedUsersInput = {
+    create?: XOR<UserCreateWithoutTrackedUsersInput, UserUncheckedCreateWithoutTrackedUsersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTrackedUsersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type TrackedUserCreateNestedOneWithoutTrackedByIdInput = {
+    create?: XOR<TrackedUserCreateWithoutTrackedByIdInput, TrackedUserUncheckedCreateWithoutTrackedByIdInput>
+    connectOrCreate?: TrackedUserCreateOrConnectWithoutTrackedByIdInput
+    connect?: TrackedUserWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutTrackedUsersNestedInput = {
@@ -3793,6 +5051,14 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutTrackedUsersInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTrackedUsersInput, UserUpdateWithoutTrackedUsersInput>, UserUncheckedUpdateWithoutTrackedUsersInput>
+  }
+
+  export type TrackedUserUpdateOneRequiredWithoutTrackedByIdNestedInput = {
+    create?: XOR<TrackedUserCreateWithoutTrackedByIdInput, TrackedUserUncheckedCreateWithoutTrackedByIdInput>
+    connectOrCreate?: TrackedUserCreateOrConnectWithoutTrackedByIdInput
+    upsert?: TrackedUserUpsertWithoutTrackedByIdInput
+    connect?: TrackedUserWhereUniqueInput
+    update?: XOR<XOR<TrackedUserUpdateToOneWithWhereWithoutTrackedByIdInput, TrackedUserUpdateWithoutTrackedByIdInput>, TrackedUserUncheckedUpdateWithoutTrackedByIdInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3837,22 +5103,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3891,39 +5141,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3938,58 +5155,90 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type TrackedUserCreateWithoutTrackedByInput = {
+  export type UserTrackedCreateWithoutUserInput = {
     id?: string
-    steamid: number
-    banned: boolean
-    ban_Date?: Date | string | null
+    date_added?: Date | string
+    trackedUser: TrackedUserCreateNestedOneWithoutTrackedByIdInput
+  }
+
+  export type UserTrackedUncheckedCreateWithoutUserInput = {
+    id?: string
+    trackedUserSteamid: string
     date_added?: Date | string
   }
 
-  export type TrackedUserUncheckedCreateWithoutTrackedByInput = {
-    id?: string
-    steamid: number
-    banned: boolean
-    ban_Date?: Date | string | null
-    date_added?: Date | string
+  export type UserTrackedCreateOrConnectWithoutUserInput = {
+    where: UserTrackedWhereUniqueInput
+    create: XOR<UserTrackedCreateWithoutUserInput, UserTrackedUncheckedCreateWithoutUserInput>
   }
 
-  export type TrackedUserCreateOrConnectWithoutTrackedByInput = {
-    where: TrackedUserWhereUniqueInput
-    create: XOR<TrackedUserCreateWithoutTrackedByInput, TrackedUserUncheckedCreateWithoutTrackedByInput>
-  }
-
-  export type TrackedUserCreateManyTrackedByInputEnvelope = {
-    data: TrackedUserCreateManyTrackedByInput | TrackedUserCreateManyTrackedByInput[]
+  export type UserTrackedCreateManyUserInputEnvelope = {
+    data: UserTrackedCreateManyUserInput | UserTrackedCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type TrackedUserUpsertWithWhereUniqueWithoutTrackedByInput = {
-    where: TrackedUserWhereUniqueInput
-    update: XOR<TrackedUserUpdateWithoutTrackedByInput, TrackedUserUncheckedUpdateWithoutTrackedByInput>
-    create: XOR<TrackedUserCreateWithoutTrackedByInput, TrackedUserUncheckedCreateWithoutTrackedByInput>
+  export type UserTrackedUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserTrackedWhereUniqueInput
+    update: XOR<UserTrackedUpdateWithoutUserInput, UserTrackedUncheckedUpdateWithoutUserInput>
+    create: XOR<UserTrackedCreateWithoutUserInput, UserTrackedUncheckedCreateWithoutUserInput>
   }
 
-  export type TrackedUserUpdateWithWhereUniqueWithoutTrackedByInput = {
-    where: TrackedUserWhereUniqueInput
-    data: XOR<TrackedUserUpdateWithoutTrackedByInput, TrackedUserUncheckedUpdateWithoutTrackedByInput>
+  export type UserTrackedUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserTrackedWhereUniqueInput
+    data: XOR<UserTrackedUpdateWithoutUserInput, UserTrackedUncheckedUpdateWithoutUserInput>
   }
 
-  export type TrackedUserUpdateManyWithWhereWithoutTrackedByInput = {
-    where: TrackedUserScalarWhereInput
-    data: XOR<TrackedUserUpdateManyMutationInput, TrackedUserUncheckedUpdateManyWithoutTrackedByInput>
+  export type UserTrackedUpdateManyWithWhereWithoutUserInput = {
+    where: UserTrackedScalarWhereInput
+    data: XOR<UserTrackedUpdateManyMutationInput, UserTrackedUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type TrackedUserScalarWhereInput = {
-    AND?: TrackedUserScalarWhereInput | TrackedUserScalarWhereInput[]
-    OR?: TrackedUserScalarWhereInput[]
-    NOT?: TrackedUserScalarWhereInput | TrackedUserScalarWhereInput[]
-    id?: StringFilter<"TrackedUser"> | string
-    steamid?: IntFilter<"TrackedUser"> | number
-    banned?: BoolFilter<"TrackedUser"> | boolean
-    ban_Date?: DateTimeNullableFilter<"TrackedUser"> | Date | string | null
-    date_added?: DateTimeFilter<"TrackedUser"> | Date | string
-    trackedById?: StringFilter<"TrackedUser"> | string
+  export type UserTrackedScalarWhereInput = {
+    AND?: UserTrackedScalarWhereInput | UserTrackedScalarWhereInput[]
+    OR?: UserTrackedScalarWhereInput[]
+    NOT?: UserTrackedScalarWhereInput | UserTrackedScalarWhereInput[]
+    id?: StringFilter<"UserTracked"> | string
+    userId?: StringFilter<"UserTracked"> | string
+    trackedUserSteamid?: StringFilter<"UserTracked"> | string
+    date_added?: DateTimeFilter<"UserTracked"> | Date | string
+  }
+
+  export type UserTrackedCreateWithoutTrackedUserInput = {
+    id?: string
+    date_added?: Date | string
+    user: UserCreateNestedOneWithoutTrackedUsersInput
+  }
+
+  export type UserTrackedUncheckedCreateWithoutTrackedUserInput = {
+    id?: string
+    userId: string
+    date_added?: Date | string
+  }
+
+  export type UserTrackedCreateOrConnectWithoutTrackedUserInput = {
+    where: UserTrackedWhereUniqueInput
+    create: XOR<UserTrackedCreateWithoutTrackedUserInput, UserTrackedUncheckedCreateWithoutTrackedUserInput>
+  }
+
+  export type UserTrackedCreateManyTrackedUserInputEnvelope = {
+    data: UserTrackedCreateManyTrackedUserInput | UserTrackedCreateManyTrackedUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserTrackedUpsertWithWhereUniqueWithoutTrackedUserInput = {
+    where: UserTrackedWhereUniqueInput
+    update: XOR<UserTrackedUpdateWithoutTrackedUserInput, UserTrackedUncheckedUpdateWithoutTrackedUserInput>
+    create: XOR<UserTrackedCreateWithoutTrackedUserInput, UserTrackedUncheckedCreateWithoutTrackedUserInput>
+  }
+
+  export type UserTrackedUpdateWithWhereUniqueWithoutTrackedUserInput = {
+    where: UserTrackedWhereUniqueInput
+    data: XOR<UserTrackedUpdateWithoutTrackedUserInput, UserTrackedUncheckedUpdateWithoutTrackedUserInput>
+  }
+
+  export type UserTrackedUpdateManyWithWhereWithoutTrackedUserInput = {
+    where: UserTrackedScalarWhereInput
+    data: XOR<UserTrackedUpdateManyMutationInput, UserTrackedUncheckedUpdateManyWithoutTrackedUserInput>
   }
 
   export type UserCreateWithoutTrackedUsersInput = {
@@ -4009,6 +5258,25 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutTrackedUsersInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutTrackedUsersInput, UserUncheckedCreateWithoutTrackedUsersInput>
+  }
+
+  export type TrackedUserCreateWithoutTrackedByIdInput = {
+    steamid: string
+    vacbans: number
+    gamebans: number
+    date_added?: Date | string
+  }
+
+  export type TrackedUserUncheckedCreateWithoutTrackedByIdInput = {
+    steamid: string
+    vacbans: number
+    gamebans: number
+    date_added?: Date | string
+  }
+
+  export type TrackedUserCreateOrConnectWithoutTrackedByIdInput = {
+    where: TrackedUserWhereUniqueInput
+    create: XOR<TrackedUserCreateWithoutTrackedByIdInput, TrackedUserUncheckedCreateWithoutTrackedByIdInput>
   }
 
   export type UserUpsertWithoutTrackedUsersInput = {
@@ -4036,35 +5304,76 @@ export namespace Prisma {
     hashed_password?: StringFieldUpdateOperationsInput | string
   }
 
-  export type TrackedUserCreateManyTrackedByInput = {
+  export type TrackedUserUpsertWithoutTrackedByIdInput = {
+    update: XOR<TrackedUserUpdateWithoutTrackedByIdInput, TrackedUserUncheckedUpdateWithoutTrackedByIdInput>
+    create: XOR<TrackedUserCreateWithoutTrackedByIdInput, TrackedUserUncheckedCreateWithoutTrackedByIdInput>
+    where?: TrackedUserWhereInput
+  }
+
+  export type TrackedUserUpdateToOneWithWhereWithoutTrackedByIdInput = {
+    where?: TrackedUserWhereInput
+    data: XOR<TrackedUserUpdateWithoutTrackedByIdInput, TrackedUserUncheckedUpdateWithoutTrackedByIdInput>
+  }
+
+  export type TrackedUserUpdateWithoutTrackedByIdInput = {
+    steamid?: StringFieldUpdateOperationsInput | string
+    vacbans?: IntFieldUpdateOperationsInput | number
+    gamebans?: IntFieldUpdateOperationsInput | number
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrackedUserUncheckedUpdateWithoutTrackedByIdInput = {
+    steamid?: StringFieldUpdateOperationsInput | string
+    vacbans?: IntFieldUpdateOperationsInput | number
+    gamebans?: IntFieldUpdateOperationsInput | number
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserTrackedCreateManyUserInput = {
     id?: string
-    steamid: number
-    banned: boolean
-    ban_Date?: Date | string | null
+    trackedUserSteamid: string
     date_added?: Date | string
   }
 
-  export type TrackedUserUpdateWithoutTrackedByInput = {
+  export type UserTrackedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    steamid?: IntFieldUpdateOperationsInput | number
-    banned?: BoolFieldUpdateOperationsInput | boolean
-    ban_Date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+    trackedUser?: TrackedUserUpdateOneRequiredWithoutTrackedByIdNestedInput
+  }
+
+  export type UserTrackedUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    trackedUserSteamid?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TrackedUserUncheckedUpdateWithoutTrackedByInput = {
+  export type UserTrackedUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    steamid?: IntFieldUpdateOperationsInput | number
-    banned?: BoolFieldUpdateOperationsInput | boolean
-    ban_Date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trackedUserSteamid?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TrackedUserUncheckedUpdateManyWithoutTrackedByInput = {
+  export type UserTrackedCreateManyTrackedUserInput = {
+    id?: string
+    userId: string
+    date_added?: Date | string
+  }
+
+  export type UserTrackedUpdateWithoutTrackedUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    steamid?: IntFieldUpdateOperationsInput | number
-    banned?: BoolFieldUpdateOperationsInput | boolean
-    ban_Date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutTrackedUsersNestedInput
+  }
+
+  export type UserTrackedUncheckedUpdateWithoutTrackedUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date_added?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserTrackedUncheckedUpdateManyWithoutTrackedUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     date_added?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

@@ -54,6 +54,7 @@ export async function POST(request: Request) {
     }
 
     const AddUser = await AddUserInfo(UserInfo, token?.sub);
+    console.log(AddUser);
 
     return NextResponse.json({ message: "User Added" }, { status: 201 });
   } catch (err: any) {

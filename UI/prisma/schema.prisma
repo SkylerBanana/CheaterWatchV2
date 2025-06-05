@@ -19,18 +19,28 @@ model User {
   email           String        @unique
   username        String        @unique
   hashed_password String
-  trackedUsers    TrackedUser[] @relation("TrackedByUser")
+  trackedUsers    UserTracked[]
 }
 
 model TrackedUser {
-  id         String   @id @default(cuid(2))
-  steamid    Int
+  steamid    String   @id
   vacbans    Int
   gamebans   Int
   date_added DateTime @default(now())
 
-  trackedBy   User   @relation("TrackedByUser", fields: [trackedById], references: [id])
-  trackedById String
-
-  @@unique([trackedById, steamid])
+  trackedById UserTracked[]
 }
+
+model UserTracked {
+  id     String @id @default(cuid(2))
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  trackedUser        TrackedUser @relation(fields: [trackedUserSteamid], references: [steamid])
+  trackedUserSteamid String
+  date_added         DateTime    @default(now())
+
+  @@unique([userId, trackedUserSteamid])
+}
+
+//Ima keep it 100 Doing this in regular SQL is my prefered way to do it but you really should learn an ORM so dats what im doing

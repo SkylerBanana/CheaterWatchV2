@@ -17,7 +17,9 @@ export async function AddUserInfo(userData: any, userID: any) {
         },
       },
     });
-  } catch (err) {
-    console.log(err);
+  } catch (e: any) {
+    if (e.code === "P2002") {
+      throw e.code;
+    }
   }
 }

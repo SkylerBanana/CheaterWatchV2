@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { z, ZodError } from "zod/v4";
-import SteamIDConverter from "../../serverActions/steamIdConversion";
+import SteamIDConverter from "../../serverFunctions/steamIdConversion";
 import { GetUserInfoCommunityID } from "./GetUserInfoCommunityID";
 import { GetUserInfoID64 } from "./GetUserInfoID64";
 import { AddUserInfo } from "./AddUserInfoToDB";
 import { getToken } from "next-auth/jwt";
+import { RateLimiter } from "@/app/serverFunctions/rateLimiter";
 
 function sanitize(input: string): string {
   // Trims whitespace i can do more stuff here if neeeded
@@ -23,6 +24,8 @@ const User = z
 
 export async function POST(request: Request) {
   try {
+    RateLimiter();
+
     const token = await getToken({
       req: request as any,
       secret: process.env.NEXTAUTH_SECRET,
@@ -61,6 +64,13 @@ export async function POST(request: Request) {
     if (err instanceof ZodError) {
       return NextResponse.json({ errors: err.issues }, { status: 400 });
     }
+    if (err === "P2002") {
+      return NextResponse.json(
+        { message: "User Is Already Tracked" },
+        { status: 409 }
+      );
+    }
+
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }
